@@ -4,12 +4,18 @@
   "description": "chat (chut) me",
   "main": "index.js",
   "scripts": {
+    "dev": "npx parcel hypersimple.html",
+    "build": "npx parcel build hypersimple.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "av8ta",
   "license": "MIT",
   "dependencies": {
     "express": "^4.15.2",
+    "hypersimple": "^0.4.0",
     "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.3"
   }
 }
