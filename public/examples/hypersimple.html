@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hypersimple</title>
+  <script src="../hypersimple-source.js"></script>
+  <script>
+    // https://github.com/WebReflection/hypersimple   example is from test directory
+  const {comp, escape, html, render, update} = hypersimple;
+  this.onload = () => {
+
+    // components
+    const Button = comp(model => html`
+      <button onclick=${model.onclick}>
+        ${model.text}
+      </button>
+    `);
+
+    const Span = comp(model => html`${
+      model.map(v => `<span>${escape(v)}</span>`)
+    }`);
+
+    // main App: just like any component
+    const App = comp(model => html`
+    Lorem ipsum: ${model.count}
+      <br>
+      ${Button(model)}
+      <br>
+      ${Span(model.some.nested.value)}
+      <hr/>
+      ${App2(model2)}
+
+    `);
+
+    const App2 = comp(model2 => html`
+      model two???: ${model2.count}
+      <br>
+      ${Button(model2)}
+      <br>
+      ${Span(model2.some.nested.value)}
+    `);    
+
+    // model: it will be mutated to trigger updates on changes
+    const arr = [1, 2, 3];
+    const model = {
+      count: 0,
+      text: 'increment',
+      onclick() {
+        this.count++;
+        click(this,this.count)
+      },
+      some: {
+        nested: {
+          value: arr
+        }
+      }
+    };
+
+    const arr2 = [1, 99, 3];
+    const model2 = {
+      count: 0,
+      text: 'increment',
+      onclick() {
+        this.count++;
+        click(this,this.count)
+      },
+      some: {
+        nested: {
+          value: arr2
+        }
+      }
+    };
+
+    const click = (model, count) => {
+      update(model, {
+        some: {
+          nested: {
+            value: [1, `${model.count}`, 3]
+          }
+        }
+      })
+    }
+
+    // render
+    render(document.body, () => App(model));
+
+    setInterval(update, 2000, model, {
+      some: {
+        nested: {
+          value: [1, 4, 3]
+        }
+      }
+    });
+  };
+  </script>
+</head>
+</html>
