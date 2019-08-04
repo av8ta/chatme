@@ -1,26 +1,27 @@
 import io from 'socket.io-client'
 const socket = io('http://localhost:3000')
 import { comp, html, render, update } from 'hypersimple'
-import { Message, Messages } from './components/Messages'
+import { Messages } from './components/Messages'
+import { PaperPlane } from './components/icons/PaperPlane'
 
-const defaultMessage = [{ message: 'selamat chat :)', author: 'chatme!'}]
+const defaultMessage = [{ message: 'selamat chat :)', author: 'chatme!' }]
 
 document.addEventListener('DOMContentLoaded', () => {
 
   socket.on('connect', e => {
     let name = localStorage.getItem('name')
-    if(name === null) {
+    if (name === null) {
       name = prompt(`what's your name?`, `anonymous`)
-      name === null || name === '' ? name = `anonymous` : null
+      name === null || name === '' ? (name = `anonymous`) : null
       localStorage.setItem('name', name)
     }
     let messages = JSON.parse(localStorage.getItem('messages'))
-    if(messages === null) {
+    if (messages === null) {
       localStorage.setItem('messages', JSON.stringify(defaultMessage))
       messages = JSON.parse(localStorage.getItem('messages'))
     }
 
-    console.log('connect',model)
+    console.log('connect', model)
     update(model, {
       name,
       messages
@@ -41,35 +42,35 @@ document.addEventListener('DOMContentLoaded', () => {
     onsubmit(event) {
       console.log('message submitted', event, this)
       event.preventDefault()
-      let message = JSON.stringify({ message: document.getElementById('messageInput').value, author: localStorage.getItem('name')})
-      socket.emit(
-        'chat message',
-        `${message}`
-      )
+      let message = JSON.stringify({
+        message: document.getElementById('messageInput').value,
+        author: localStorage.getItem('name')
+      })
+      socket.emit('chat message', `${message}`)
       document.getElementById('messageInput').value = ''
     },
     name: 'alice',
-    messages: [{
-      message: defaultMessage.message,
-      author: defaultMessage.author
-    }]
+    messages: [
+      {
+        message: defaultMessage.message,
+        author: defaultMessage.author
+      }
+    ]
   }
 
   const App = comp(
     model => html`
       <ul id="messages">
-        ${Message({ message: 'chatme!' })} ${Messages(model.messages)}
+        ${Messages(model.messages)}
       </ul>
       <form action="" id="form" onsubmit=${() => model.onsubmit(event)}>
-        <input
-          id="messageInput"
-          autocomplete="off"
-          placeholder=${model.label}
-        /><button>
-          Send
-        </button>
+      <input id="messageInput" autocomplete="off" placeholder=${model.label} />
+      <button>
+        ${PaperPlane}
+      </button>
       </form>
     `
   )
   render(document.getElementById('app'), () => App(model))
 })
+
