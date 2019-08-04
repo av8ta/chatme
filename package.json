@@ -4,8 +4,9 @@
   "description": "chat (chut) me",
   "main": "index.js",
   "scripts": {
-    "dev": "npx parcel hypersimple.html",
-    "build": "npx parcel build hypersimple.html",
+    "dev": "npx parcel index.html",
+    "server": "node index.js",
+    "build": "npx parcel build index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "av8ta",

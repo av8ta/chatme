@@ -5,54 +5,10 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/hypersimple-source.js"></script>
-    <script>
-      const socket = io()
-      const { comp, escape, html, render, update } = hypersimple
-      document.addEventListener('DOMContentLoaded', () => {
-        socket.on('chat message', function(message) {
-          window.messages = model.messages
-          const messages = model.messages
-          messages.push({ message })
-          update(model, {
-            messages
-          })
-        })
-
-        const Message = comp(model => html`
-            <li>${model.message}</li>
-          `
-        )
-
-        const Messages = comp(model => html`
-              ${model.map(value => `<li>${escape(value.message)}</li>`)}
-            `
-        )
-
-        const model = {
-          label: 'type here to send a message',
-          onsubmit(event) {
-            console.log('submitted', event)
-            event.preventDefault()
-            socket.emit('chat message', document.getElementById('messageInput').value)
-            document.getElementById('messageInput').value = ''
-          },
-          messages: [{ message: 'message 1' }, { message: 'message 2' }]
-        }
-        const App = comp(model => html`
-            <ul id="messages">
-              ${Messages(model.messages)}
-            </ul>
-            <form action="" id="form" onsubmit=${() => model.onsubmit(event)}>
-              <input id="messageInput" autocomplete="off" placeholder=${model.label}/><button>
-                Send
-              </button>
-            </form>
-          `
-        )
-        render(document.body, () => App(model))
-      })
-    </script>
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
+    <!-- <script src="/hypersimple-source.js"></script> -->
+    <script src="app/index.js"></script>
+    <!-- <script type="module" src="/app/components/index.js"></script> -->
+    <div id="app"></div>
   </body>
 </html>
