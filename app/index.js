@@ -3,16 +3,33 @@ const socket = io('http://localhost:3000')
 import { comp, html, render, update } from 'hypersimple'
 import { Message, Messages } from './components/Messages'
 
-document.addEventListener('DOMContentLoaded', () => {
-  // localStorage.setItem('name', 'av8ta')
-  // let messages = [{ message: 'message 3' }, { message: 'message 4' }]
-  // localStorage.setItem('messages', JSON.stringify(messages))
-  let msgs = JSON.parse(localStorage.getItem('messages'))
-  window.msgs = msgs
+const defaultMessage = [{ message: 'selamat chat :)', author: 'chatme!'}]
 
+document.addEventListener('DOMContentLoaded', () => {
+
+  socket.on('connect', e => {
+    let name = localStorage.getItem('name')
+    if(name === null) {
+      name = prompt(`what's your name?`, `anonymous`)
+      name === null || name === '' ? name = `anonymous` : null
+      localStorage.setItem('name', name)
+    }
+    let messages = JSON.parse(localStorage.getItem('messages'))
+    if(messages === null) {
+      localStorage.setItem('messages', JSON.stringify(defaultMessage))
+      messages = JSON.parse(localStorage.getItem('messages'))
+    }
+
+    console.log('connect',model)
+    update(model, {
+      name,
+      messages
+    })
+  })
   socket.on('chat message', function(message) {
+    message = JSON.parse(message)
     const messages = model.messages
-    messages.push({ message })
+    messages.push(message)
     update(model, {
       messages
     })
@@ -24,16 +41,18 @@ document.addEventListener('DOMContentLoaded', () => {
     onsubmit(event) {
       console.log('message submitted', event, this)
       event.preventDefault()
+      let message = JSON.stringify({ message: document.getElementById('messageInput').value, author: localStorage.getItem('name')})
       socket.emit(
         'chat message',
-        `${this.name()} - ${document.getElementById('messageInput').value}`
+        `${message}`
       )
       document.getElementById('messageInput').value = ''
     },
-    name() {
-      return localStorage.getItem('name')
-    },
-    messages: [{ message: 'selamat chat :)' }]
+    name: 'alice',
+    messages: [{
+      message: defaultMessage.message,
+      author: defaultMessage.author
+    }]
   }
 
   const App = comp(
