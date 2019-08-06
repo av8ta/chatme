@@ -23,11 +23,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'))
 })
 
-// let port = process.env.PORT
-// if (port == null || port == "") {
-//   port = 3000
-// }
-let port = 3000
+let port = process.env.PORT
+if (port == null || port == "") {
+  port = 3000
+}
 
 http.listen(port, () => {
   console.log(`listening on *:${port}`)  
