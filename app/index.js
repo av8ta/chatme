@@ -1,8 +1,12 @@
 import io from 'socket.io-client'
-const socket = io('http://localhost:3000')
 import { comp, html, render, update } from 'hypersimple'
 import { Messages } from './components/Messages'
 import { PaperPlane } from './components/icons/PaperPlane'
+
+const socket = io('http://localhost:3000')
+
+
+
 
 const defaultMessage = [{ message: 'selamat chat :)', author: 'chatme!' }]
 

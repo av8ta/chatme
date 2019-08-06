@@ -2,11 +2,22 @@
   "name": "chatme",
   "version": "0.0.1",
   "description": "chat (chut) me",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "dev": "npx parcel index.html",
-    "server": "node index.js",
-    "build": "npx parcel build index.html",
+    "start": "run-s build server",
+    "dev:p": "run-s clean development parcel:dev",
+    "dev:bs": "run-s production",
+    "predev:bs": "run-s clean",
+    "postdev:bs": "run-p server browsersync",
+    "server": "node server.js",
+    "client": "serve dist",
+    "parcel:dev": "parcel index.html",
+    "parcel:build": "parcel build index.html",
+    "build": "run-s clean production parcel:build",
+    "clean": "rm -rf ./dist",
+    "development": "NODE_ENV=development",
+    "production": "NODE_ENV=production",
+    "browsersync": "node ./browserSync.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "av8ta",
@@ -17,6 +28,10 @@
     "socket.io": "^2.2.0"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.3"
+    "browser-sync": "^2.26.7",
+    "http-proxy-middleware": "^0.19.1",
+    "npm-run-all": "^4.1.5",
+    "parcel-bundler": "^1.12.3",
+    "serve": "^11.1.0"
   }
 }
