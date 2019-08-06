@@ -3,10 +3,18 @@ import { comp, html, render, update } from 'hypersimple'
 import { Messages } from './components/Messages'
 import { PaperPlane } from './components/icons/PaperPlane'
 
-const socket = io('http://localhost:3000')
+// parcel automagically provides environment variables from dotenv files in the browser during development
+// for production we pass them into heroku with ```heroku config:set```
+console.log('process.env.NODE_ENV', process.env.NODE_ENV)
+console.log('process.env', process.env.PROTOCOL, process.env.HOST, process.env.PORT)
+const protocol = process.env.PROTOCOL
+const host = process.env.HOST
+const port = process.env.PORT
+let url = `${protocol}://${host}:${port}`
+process.env.NODE_ENV === 'production' ? url = `https://sritong.herokuapp.com/` : null // heroku shenanigans with ports
 
-
-
+console.log(`socketio connecting on: ${protocol}://${host}:${port}`)
+const socket = io(url)
 
 const defaultMessage = [{ message: 'selamat chat :)', author: 'chatme!' }]
 

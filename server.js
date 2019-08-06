@@ -1,3 +1,5 @@
+require('dotenv').config()
+console.log('process.env',process.env.PROTOCOL,process.env.HOST,process.env.PORT)
 const express = require('express')
 const app = express()
 const http = require('http').createServer(app)
@@ -14,23 +16,18 @@ if (isProd) {
 app.use(express.static('public'))
 app.use(express.static(path.join(__dirname, 'dist')))
 
-// app.get('/', (req, res) => {
-//   res.sendFile(__dirname + '/index.html')
-// })
+
 
 // initialize router
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'))
 })
 
-let port = process.env.PORT
-if (port == null || port == "") {
-  port = 3000
-}
-
-http.listen(port, () => {
-  console.log(`listening on *:${port}`)  
+http.listen(process.env.PORT, () => {
+  console.log(`server listening on ${process.env.PROTOCOL}://${process.env.HOST}:${process.env.PORT}`)  
 })
+
+// io.origins('*:*')
 
 io.on('connection', socket => {
   console.log('a user has connected')
@@ -41,5 +38,4 @@ io.on('connection', socket => {
     console.log('message: ', message);
     io.emit('chat message', message)
   })
-  
 })
