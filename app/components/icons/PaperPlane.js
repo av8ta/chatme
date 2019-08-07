@@ -5,10 +5,10 @@ export const PaperPlane = comp(() => svg`
 <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-<polyline style="fill:#F5C86E;" points="498.334,19 300.144,305.103 279.486,334.925 279.486,435.065 354.796,361.463 
+<polyline style="fill:var(--paper-plane-1);" points="498.334,19 300.144,305.103 279.486,334.925 279.486,435.065 354.796,361.463 
 	316.334,289.667 "/>
-<polyline style="fill:#FAE196;" points="209.505,313.515 64,269 502,10 502,403 283,336 "/>
-<polygon style="fill:#F5B955;" points="279.486,435.065 213.353,314.693 498.334,19 285.632,326.052 "/>
+<polyline style="fill:var(--paper-plane-2);" points="209.505,313.515 64,269 502,10 502,403 283,336 "/>
+<polygon style="fill:var(--paper-plane-3);" points="279.486,435.065 213.353,314.693 498.334,19 285.632,326.052 "/>
 <path d="M506.955,1.314c-3.119-1.78-6.955-1.75-10.045,0.078L313.656,109.756c-4.754,2.811-6.329,8.943-3.518,13.697
 	c2.81,4.753,8.942,6.328,13.697,3.518l131.482-77.749L210.411,303.335L88.603,266.069l158.965-94
 	c4.754-2.812,6.329-8.944,3.518-13.698c-2.81-4.753-8.943-6.33-13.697-3.518L58.91,260.392c-3.41,2.017-5.309,5.856-4.84,9.791

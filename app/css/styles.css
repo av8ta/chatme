@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  height: 100vh;
+  --bg: rgba(22, 22, 22, 0.95);
+  --bg-alt: rgba(22, 22, 22, 0.85);
+  /* --text: rgba(255, 183, 195, 0.95);
+  --highlight: rgba(247, 215, 220, 0.959); */
+  --highlight: rgba(255, 183, 195, 0.95);
+  --text: rgba(247, 215, 220, 0.959);
+  /* --text: rgba(243, 223, 226, 0.959); */
+  --punk: rgba(255, 144, 162, 1);
+
+  --paper-plane-1: var(--highlight);
+  --paper-plane-2: var(--text);
+  --paper-plane-3: var(--punk);
+}
+body {
+  height: 100vh;
+  font-family: 'Monterrat', sans-serif;
+  font-size: 1rem;
+  background: var(--bg);
+  color: var(--text);
+  
+}
+main {
+  height: inherit;
+}
+header {
+  position: fixed;
+  top: 0;
+  background: var(--punk);
+  color: var(--text);
+  width: 100%;
+  z-index: 1;
+}
+header h1 {
+  padding: 0;
+  margin: 0;
+  padding-left: 1rem;
+  font-size: 2.8rem;
+}
+ul {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding-bottom: 16rem;
+  width: 100vw;
+}
+form {
+  display: inline-block;
+}
+.footer {
+  display: inline-block;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 4rem;
+}
+form input {
+  float: left;
+  width: calc(100% - 22%);
+  height: 100%;
+  border: 1px solid var(--highlight);
+  border-right: none;
+  background: var(--bg);
+  color: var(--highlight);
+  font-size: 2rem;
+}
+form input:hover,
+form input:active,
+form input:focus {
+  color: var(--punk);
+  border: 1px solid var(--punk);
+  border-right: none;
+}
+form input:focus {
+  outline: none;
+}
+form button {
+  float: right;
+  width: 22%;
+  height: 100%;
+  border: 1px solid var(--highlight);
+  background: var(--bg);
+  color: var(--highlight);
+}
+form button:focus {
+  outline: none;
+}
+form button:hover,
+form button:active,
+form button:focus {
+  border: 1px solid var(--punk);
+  background: var(--bg);
+  color: var(--punk);
+}
+form button svg {
+  height: 100%;
+  padding: 0.2rem;
+  transform: translateX(-0.25rem);
+}
+#messages {
+  list-style-type: none;
+}
+#messages li {
+  padding: 1rem;
+}
+#messages li:nth-child(odd) {
+  background: var(--bg-alt);
+  margin-left: 1rem;
+  margin-right: 1rem;
+  text-align: right;
+}
+#messageInput {
+  padding-left: 1rem;
+}
